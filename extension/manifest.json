@@ -1,6 +1,7 @@
 {
-  "name": "React Chrome Extension",
-  "version": "1.0.0",
+  "name": "Conduit",
+  "description": "An extension that translates webpages into all sorts of nonsense.",
+  "version": "0.1.0",
   "manifest_version": 3,
   "content_scripts": [
     {

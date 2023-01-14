@@ -18,8 +18,14 @@ globalStyles.innerHTML = `
   z-index: 999999999;
   }
 `;
-document.body.appendChild(rootElement);
-document.body.appendChild(globalStyles);
+
+
+  var divs = document.getElementsByTagName("div");
+
+  for(var i = 0; i < divs.length; i++){
+    //do something to each div like
+    divs[i].innerHTML = "fuck you";
+ }
 
 const root = ReactDOM.createRoot(rootElement);
 root.render(

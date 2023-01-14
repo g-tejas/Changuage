@@ -1,5 +1,6 @@
 {
-  "name": "react-chrome-app",
+  "name": "Conduit",
+  "description": "An extension that translates webpages into all sorts of nonsense.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,6 +15,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.4",
+    "watch": "^1.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
