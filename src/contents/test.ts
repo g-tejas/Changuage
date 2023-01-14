@@ -1,10 +1,9 @@
-import { test } from '@/utils/test';
 const { Configuration, OpenAIApi } = require("openai");
 
 const Execute = () => {
 
   const configuration = new Configuration({
-    apiKey: ''
+    apiKey: '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'
   });
   const openai = new OpenAIApi(configuration);
 

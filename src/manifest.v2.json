@@ -1,7 +1,7 @@
 {
-  "name": "Conduit",
-  "description": "An chrome extension that turns website content into all sorts of nonsense.",
-  "version": "1.0",
+  "name": "Changuage",
+  "description": "A chrome extension that turns website content into all sorts of nonsense. Written by Cheng-Yu, Eric, Archit and Tejas for the 2023 Hackathon.",
+  "version": "4.2.0",
   "manifest_version": 2,
   "background": {
     "page": "background.html"
@@ -14,17 +14,17 @@
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "/images/get_started16.png",
-      "32": "/images/get_started32.png",
-      "48": "/images/get_started48.png",
-      "128": "/images/get_started128.png"
+      "16": "/images/conduit16.png",
+      "32": "/images/conduit32.png",
+      "48": "/images/conduit64.png",
+      "128": "/images/conduit128.png"
     }
   },
   "icons": {
-    "16": "/images/get_started16.png",
-    "32": "/images/get_started32.png",
-    "48": "/images/get_started48.png",
-    "128": "/images/get_started128.png"
+    "16": "/images/conduit16.png",
+    "32": "/images/conduit32.png",
+    "48": "/images/conduit64.png",
+    "128": "/images/conduit128.png"
   },
   "options_page": "options.html",
   "content_scripts": [
