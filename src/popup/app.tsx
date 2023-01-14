@@ -1,7 +1,9 @@
 import { useColor } from '@/hooks/useColor';
 import { composeIssuePredicates } from 'fork-ts-checker-webpack-plugin/lib/issue/IssuePredicate';
+import "./style.css";
 import { useState } from 'react';
-import { Button } from 'antd';
+import {  Select } from 'antd';
+const {Option} = Select;
 
 
 
@@ -12,8 +14,7 @@ export const App = () => {
   const { color } = useColor();
   const [transType, setTransType] = useState(localStorage.getItem("translate_type"));
 
-  const handleClick = (e) => {
-    var type = e.target.value;
+  const handleSelect = (type) => {
     setTransType(type);
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const curId = tabs[0].id;
@@ -29,21 +30,25 @@ export const App = () => {
   }
 
   return (
-    <div>
+    <div className="extension-body">
       Status: {transType}
-      <Button type="primary" value="convert %ORIGINALTEXT% to shakespearean" onClick={handleClick}>Shakespearean Speak</Button>
-      <Button value="'%ORIGINALTEXT%'. Translate it to gen z slang" onClick={handleClick}>Gen-Z Speak</Button>
-      <Button value="translate %ORIGINALTEXT% with many emojis" onClick={handleClick}>Emoji Speak</Button>
-      <Button value="translate %ORIGINALTEXT% to legal contract speak" onClick={handleClick}>Legal Contract Speak</Button>
-      <Button value="write %ORIGINALTEXT% in UwU speak" onClick={handleClick}>UwU Speak</Button>
-      <Button value="write %ORIGINALTEXT% in pirate speak" onClick={handleClick}>Pirate Speak</Button>
-      <Button value="translate %ORIGINALTEXT% into cowboy speak" onClick={handleClick}>Cowboy Speak</Button>
-      <Button value="translate %ORIGINALTEXT% into valley girl speak" onClick={handleClick}>Valley girl Speak</Button>
-      <Button value="translate %ORIGINALTEXT% into a gangsta from da hood" onClick={handleClick}>Valley girl Speak</Button>
-      <Button value="'%ORIGINALTEXT%'. make it sound extremely offensive to the user" onClick={handleClick}>Offensive Speak</Button>
-      <Button value="%ORIGINALTEXT%. Make it extremely short." onClick={handleClick}>Compact Speak</Button>
-      <Button value="%ORIGINALTEXT%. Make it sound like someone who is extremely confused about everything" onClick={handleClick}>Confused Speak</Button>
-      <Button value="stop" onClick={handleClick}>STOP</Button>
+
+      <Select onSelect={handleSelect} size="large" style={{width: 200}} placeholder="Please select an option">
+      <Option type="primary" value="convert %ORIGINALTEXT% to shakespearean" >Shakespearean Speak</Option>
+      <Option value="'%ORIGINALTEXT%'. Translate it to gen z slang" >Gen-Z Speak</Option>
+      <Option value="translate %ORIGINALTEXT% with many emojis" >Emoji Speak</Option>
+      <Option value="translate %ORIGINALTEXT% to legal contract speak" >Legal Contract Speak</Option>
+      <Option value="write %ORIGINALTEXT% in UwU speak" >UwU Speak</Option>
+      <Option value="write %ORIGINALTEXT% in pirate speak" >Pirate Speak</Option>
+      <Option value="translate %ORIGINALTEXT% into cowboy speak" >Cowboy Speak</Option>
+      <Option value="translate %ORIGINALTEXT% into valley girl speak" >Valley girl Speak</Option>
+      <Option value="translate %ORIGINALTEXT% into a gangsta from da hood" >Valley girl Speak</Option>
+      <Option value="'%ORIGINALTEXT%'. make it sound extremely offensive to the user" >Offensive Speak</Option>
+      <Option value="%ORIGINALTEXT%. Make it extremely short." >Compact Speak</Option>
+      <Option value="%ORIGINALTEXT%. Make it sound like someone who is extremely confused about everything" >Confused Speak</Option>
+      <Option value="stop" >STOP</Option>
+</Select>
+
     </div>
   );
 };
