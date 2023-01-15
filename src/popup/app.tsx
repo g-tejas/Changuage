@@ -53,7 +53,7 @@ export const App = () => {
       <div className="extension-body">
         {/* <img className='logo' src="https://i.ibb.co/wpGPgbJ/DALL-E-2023-01-14-23-36-10-an-impressionist-painting-of-a-hoodie-clad-teenager-shakespeare-sitting-o.png"></img> */}
         <img className="logo" src="https://i.ibb.co/89dtXdt/DALL-E-2023-01-15-02-22-07-add-a-transparent-background.png"></img>
-        <Title level={2}>Changuage</Title>
+        <div className='title'>Changuage</div>
         <br />
         <br />
         <Select disabled={!shouldTrans} value={transType} onSelect={handleSelect} size="large" style={{ width: 250 }} placeholder="Please select an option">
@@ -72,7 +72,7 @@ export const App = () => {
           <Option value="%ORIGINALTEXT%. Make it sound like someone who is extremely confused about everything" >Make everything sound confused</Option>
         </Select>
         <br />
-        <div>Translate <Switch size="default" checked={shouldTrans} onChange={handleSwitch}></Switch></div>
+        <div className='translate-container'><div className="translate-title">Translate</div> <Switch size="default" checked={shouldTrans} onChange={handleSwitch}></Switch></div>
 
       </div>
     </Spin>
