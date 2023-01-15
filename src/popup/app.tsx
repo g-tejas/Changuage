@@ -21,6 +21,7 @@ export const App = () => {
       }, 6000);
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const curId = tabs[0].id;
+
       if (curId) {
 
         chrome.tabs.executeScript(curId, { code: `localStorage.setItem("translate_type", "${type}"); window.location.reload()` });
