@@ -1,7 +1,8 @@
 import { useColor } from '@/hooks/useColor';
 import "./style.css";
 import { useEffect, useState } from 'react';
-import { Select, Typography, Switch, Spin } from 'antd';
+import { Select, Typography, Switch, Spin, Button } from 'antd';
+import Link from 'antd/es/typography/Link';
 const { Option } = Select;
 const { Title } = Typography;
 
@@ -11,41 +12,54 @@ export const App = () => {
   const [shouldTrans, setShouldTrans] = useState(localStorage.getItem("translate_type") !== null && localStorage.getItem("translate_type") !== "stop");
   const [shouldSpin, setShouldSpin] = useState(false);
 
+  useEffect(() => {
+    chrome.tabs.onActivated.addListener(function(activeInfo) {
+      console.log(activeInfo.tabId);
+  });
+  }, [])
+
   const handleSelect = (type) => {
     setTransType(type);
     localStorage.setItem("translate_type", type)
+    
+  };
+
+  const Confirm = () => {
     setShouldSpin(true);
     setTimeout(
       function () {
         setShouldSpin(false);
       }, 6000);
+
+      
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       const curId = tabs[0].id;
 
       if (curId) {
 
-        chrome.tabs.executeScript(curId, { code: `localStorage.setItem("translate_type", "${type}"); window.location.reload()` });
+        chrome.tabs.executeScript(curId, { code: `localStorage.setItem("translate_type", "${transType}"); window.location.reload()` });
       }
     });
-  };
-
-  if (!color) {
-    return <div>Init color not found</div>;
   }
 
-  const handleSwitch = (checked) => {
-    setShouldTrans(checked);
+  const Revert = () => {
     setTransType("stop");
-    if (!checked) {
-      localStorage.setItem("translate_type", "stop");
-      chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        const curId = tabs[0].id;
-        if (curId) {
+    localStorage.setItem("translate_type", "stop")
+    setShouldSpin(true);
+    setTimeout(
+      function () {
+        setShouldSpin(false);
+      }, 6000);
 
-          chrome.tabs.executeScript(curId, { code: `localStorage.setItem("translate_type", "stop"); window.location.reload()` });
-        }
-      });
-    }
+      
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+      const curId = tabs[0].id;
+
+      if (curId) {
+
+        chrome.tabs.executeScript(curId, { code: `localStorage.setItem("translate_type", "stop"); window.location.reload()` });
+      }
+    });
   }
 
   return (
@@ -56,7 +70,7 @@ export const App = () => {
         <div className='title'>Changuage</div>
         <br />
         <br />
-        <Select disabled={!shouldTrans} value={transType} onSelect={handleSelect} size="large" style={{ width: 250 }} placeholder="Please select an option">
+        <Select value={transType} onSelect={handleSelect} size="large" style={{ width: 250 }} placeholder="Please select an option">
           <Option value="stop" >Please select an option</Option>
           <Option value="convert %ORIGINALTEXT% to shakespearean" >Shakespearean Language</Option>
           <Option value="'%ORIGINALTEXT%'. Translate it to gen z slang" >Gen Z Slang</Option>
@@ -72,8 +86,10 @@ export const App = () => {
           <Option value="%ORIGINALTEXT%. Make it sound like someone who is extremely confused about everything" >Make everything sound confused</Option>
         </Select>
         <br />
-        <div className='translate-container'><div className="translate-title">Translate</div> <Switch size="default" checked={shouldTrans} onChange={handleSwitch}></Switch></div>
-
+        <br/>
+        <Button type="primary" onClick={Confirm}>Begin Translation</Button>
+        <Link onClick={Revert}>Return to original</Link>
+      
       </div>
     </Spin>
 

@@ -9,6 +9,8 @@
   "permissions": [
     "storage",
     "activeTab",
+    "browser_action",
+    "tabs",
     "declarativeContent"
   ],
   "browser_action": {
